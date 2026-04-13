@@ -3,21 +3,37 @@ import Header from "./mycomponent/Header";
 import "./App.css";
 import Todos from "./mycomponent/Todos";
 import Footer from "./mycomponent/Footer";
-const onDelete =() => {
-                  console.log("i am on delete");
-                }
-function App() {
-  let items = [
-    { id: 1, title: "Buy groceries", desc: "Milk, Bread, Eggs, Butter" },
-    { id: 2, title: "Call Mom", desc: "Check in and say hi" },
-    { id: 3, title: "Finish project", desc: "Complete the React project" },
+import { useState } from "react";
 
-  ];
+function App() {
+const onDelete = (item) => {
+  console.log("i am on delete", item);
+  setItems(items.filter((e) => {return e !== item}));
+};
+
+
+  const [items, setItems] = useState([
+    {
+      id: 1,
+      title: "go to market",
+      desc: "you need to go to market to get this job done",
+    },
+    {
+      id: 2,
+      title: "go to mall",
+      desc: "you need to go to mall to get this job done",
+    },
+    {
+      id: 3,
+      title: "go to school",
+      desc: "you need to go to school to get this job done",
+    },
+  ]);
   return (
     <>
-      <Header  name="Alice"/>
-       <Todos items={items} onDelete={onDelete} /> 
-       <Footer /> 
+      <Header name="Alice" />
+      <Todos items={items} onDelete={onDelete} />
+      <Footer />
     </>
   );
 }
