@@ -4,13 +4,28 @@ import "./App.css";
 import Todos from "./mycomponent/Todos";
 import Footer from "./mycomponent/Footer";
 import { useState } from "react";
+import AddTodo from "./mycomponent/AddTodo";
 
 function App() {
-const onDelete = (item) => {
-  console.log("i am on delete", item);
-  setItems(items.filter((e) => {return e !== item}));
-};
-
+  const onDelete = (item) => {
+    console.log("i am on delete", item);
+    setItems(
+      items.filter((e) => {
+        return e !== item;
+      }),
+    );
+  };
+  const addTodo = (title, desc) => {
+    console.log("i am adding this todo", title, desc);
+    let id =items.length + 1;
+    let myTodo = {
+      id: id,
+      title: title,
+      desc: desc,
+    };
+    setItems([...items, myTodo]);
+    console.log(myTodo);
+  };
 
   const [items, setItems] = useState([
     {
@@ -32,6 +47,7 @@ const onDelete = (item) => {
   return (
     <>
       <Header name="Alice" />
+      <AddTodo addTodo={addTodo} />
       <Todos items={items} onDelete={onDelete} />
       <Footer />
     </>
